@@ -20,6 +20,8 @@ jobs:
     - name: Install dependencies
 
       run: |
-        npm --version
-        node --version
+        DARGUMENTS="-Dmaven.test.skip"
+        DARGUMENTS="$DARGUMENTS -Dmaven.deploy.skip=true"
+        MAVEN_ARGS="-Darguments='$DARGUMENTS'"
+        echo $MAVEN_ARGS
       shell: bash
