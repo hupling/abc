@@ -22,7 +22,7 @@ jobs:
           color: ${{ matrix.color }}
         run: |
           echo "$color" 
-          # echo "output_${version}=${color}" >> "$GITHUB_OUTPUT"
+          # echo "color=${color}" >> "$GITHUB_OUTPUT"
       - name: a
         run: |
           echo $color
