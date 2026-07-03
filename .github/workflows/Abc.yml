@@ -22,8 +22,8 @@ jobs:
           color: ${{ matrix.color }}
         run: |
           echo "$color" 
-          # echo "color=${color}" >> "$GITHUB_OUTPUT"
+          echo "color=${color}" >> "$GITHUB_OUTPUT"
       - name: a
         run: |
           echo $color
-          echo ${{ steps.str1.outputs.color }}
+          echo "Aus Output: ${{ steps.str1.outputs.color }}"
