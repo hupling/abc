@@ -17,7 +17,7 @@ jobs:
       matrix:
         color: ["red", "green", "blue"]
     steps:
-      - name: Define Color
+      - id: str1
         env:
           color: ${{ matrix.color }}
         run: |
@@ -26,3 +26,4 @@ jobs:
       - name: a
         run: |
           echo $color
+          echo ${{ steps.str1.outputs.color }}
