@@ -11,8 +11,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-
-    - name: Install dependencies
-
-      run: |
-        echo "hallo welt"
+  produce-artifacts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        color: ["red", "green", "blue"]
+    steps:
+      - name: Define Color
+        env:
+          color: ${{ matrix.color }}
+        run: |
+          echo "$color" > color
+          # echo "output_${version}=${color}" >> "$GITHUB_OUTPUT"
+      - name: a
+        run: |
+          echo $color
