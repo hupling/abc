@@ -21,8 +21,9 @@ jobs:
       - id: str1
         env:
           color: ${{ matrix.color }}
+
         run: |
-          echo ${{ github.GITHUB_EVENT_NAME }}
+          echo ${{ github.event_name }}
           echo "$color" 
           echo "color=${color}" >> "$GITHUB_OUTPUT"
       - name: a
