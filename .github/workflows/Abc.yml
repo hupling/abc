@@ -1,6 +1,7 @@
 name: build and test Backend
 
-on: [push]
+on: 
+     pull_request:
 
 jobs:
   
@@ -15,12 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        color: []
+        color: ["ABC2"]
     steps:
       - id: str1
         env:
           color: ${{ matrix.color }}
         run: |
+          echo ${{ github.GITHUB_EVENT_NAME }}
           echo "$color" 
           echo "color=${color}" >> "$GITHUB_OUTPUT"
       - name: a
