@@ -13,18 +13,10 @@ jobs:
 
   produce-artifacts:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        color: []
+
     steps:
-      - id: str1
-        env:
-          color: ${{ matrix.color }}
-        run: |
-          echo "$color" 
-          echo "color=${color}" >> "$GITHUB_OUTPUT"
+
       - name: a
         run: |
-          echo $color
-          echo "Aus Output: ${{ steps.str1.outputs.color }}"
+
           echo ${{ fromJSON(github) }}
