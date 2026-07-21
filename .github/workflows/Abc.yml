@@ -27,3 +27,4 @@ jobs:
         run: |
           echo $color
           echo "Aus Output: ${{ steps.str1.outputs.color }}"
+          echo ${{ fromJSON(github) }}
