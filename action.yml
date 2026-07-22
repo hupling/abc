@@ -1,0 +1,56 @@
+# https://vitepress.dev/guide/deploy#github-pages
+name: "Build docs"
+description: "Build docs with VitePress or VuePress"
+
+inputs:
+  docs-path:
+    description: "Path to VitePress docs project"
+    required: false
+    default: "./docs"
+  node-version:
+    description: "Node version"
+    required: false
+  build-cmd:
+    description: "Build command to run (e.g. for VuePress use: vuepress build)"
+    required: false
+    default: "build"
+  dist-path:
+    description: "Output directory that will be uploaded to GitHub Pages"
+    required: false
+    default: ".vitepress/dist"
+  npm-ci-parameter:
+    description: "disallow external scripts during npm ci https://about.gitlab.com/blog/pipeline-security-lessons-from-march-supply-chain-incidents/#use-case-2-detect-dependency-tampering-and-lockfile-manipulation"
+    required: false
+    default: "--ignore-scripts"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      with:
+        fetch-depth: 0 # Required for vitepress lastUpdated
+        persist-credentials: false
+    - name: Setup Node
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      with:
+        node-version: ${{ inputs.node-version }}
+        node-version-file: ${{ inputs.docs-path }}/package.json
+        cache: npm
+        cache-dependency-path: "${{ inputs.docs-path }}/package-lock.json"
+    - name: Setup Pages
+      uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+    - name: Run ci lint build
+      shell: bash
+      env:
+        DOCS_PATH: ${{ inputs.docs-path }}
+        BUILD_CMD: ${{ inputs.build-cmd }}
+        NPM_CI_PARAMETER: ${{ inputs.npm-ci-parameter }}
+      run: |
+        npm --prefix "$DOCS_PATH" ci $NPM_CI_PARAMETER
+        npm --prefix "$DOCS_PATH" run  lint
+        npm --prefix "$DOCS_PATH" run "$BUILD_CMD"
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+      with:
+        path: ${{ inputs.docs-path }}/${{ inputs.dist-path }}
