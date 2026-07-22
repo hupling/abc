@@ -1,22 +1,22 @@
 name: build and test Backend
 
 on: [push]
-
 jobs:
-  
-  compliance:
+  doc:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-  produce-artifacts:
-    runs-on: ubuntu-latest
+    permissions:
+      # Required to push changes!
+      contents: write
 
     steps:
+    - uses: actions/checkout@v4
 
-    - name: GitHub-Kontext anzeigen
-      env:
-       GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
+
+    - uses: pndurette/gh-actions-auto-docs@v1
+      with:
+        action_yaml_file: ./action.yml
+        target_file: abc.md
+    - run: |
+        cat abc.md
+        
