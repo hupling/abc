@@ -12,12 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    -  run: |
-        echo "<!--doc_begin-->\n<!--doc_end-->" > README.md
-    - uses: pndurette/gh-actions-auto-docs@v1
+    - uses: bitflight-devops/github-action-readme-generator@v1
       with:
-        action_yaml_file: ./action.yml
-        target_file: abc.md
+        action: ./action.yml
+        readme: abc.md
     - run: |
         cat abc.md
         
