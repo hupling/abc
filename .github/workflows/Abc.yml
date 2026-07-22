@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-
+    -  run: |
+        echo "<!--doc_begin-->\n<!--doc_end-->" > README.md
     - uses: pndurette/gh-actions-auto-docs@v1
       with:
         action_yaml_file: ./action.yml
