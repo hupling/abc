@@ -21,6 +21,6 @@ jobs:
     - uses: it-at-m/lhm_actions/action-templates/actions/action-create-github-release@40-enhance-action-create-github-release-to-create-zip-files-for-node-modules
       with:
           artifact-name: aa
-          tag-name:  111
+          tag-name:  112
           generate-release-notes: true
-        
+          artifact-path: abc.json
