@@ -23,4 +23,4 @@ jobs:
           artifact-name: aa
           tag-name:  113
           generate-release-notes: true
-          #artifact-path: a
+          artifact-path: a
