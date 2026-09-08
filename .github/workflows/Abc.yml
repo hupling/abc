@@ -16,11 +16,11 @@ jobs:
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: aa
-        path: "abc.json"
+        path: "a"
         retention-days: 5
     - uses: it-at-m/lhm_actions/action-templates/actions/action-create-github-release@40-enhance-action-create-github-release-to-create-zip-files-for-node-modules
       with:
           artifact-name: aa
-          tag-name:  112
+          tag-name:  113
           generate-release-notes: true
-          artifact-path: abc.json
+          artifact-path: a
