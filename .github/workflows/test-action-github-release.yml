@@ -43,4 +43,19 @@ jobs:
           artifact-path: artifact.zip
           skip-artifact-decompress: true
           tag-name: test-test
+      - name: script
+        run: |
+          mkdir testfolder
+          cd testfolder
+          gh release download test-test
+          unzip artifact.zip
+          output=(ls action-create-github-release)
+          if [ "$output" != "action.yml" ]; then
+            echo "Stimmt nicht überein!"
+            exit 1
+          fi
+          gh release delete test-test --cleanup-tag
+          
+          
+          
 
